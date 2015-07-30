@@ -9,7 +9,7 @@ public class EnemyMovement : MonoBehaviour
 	private Rigidbody2D theEnemyMover;
 	
 	private Transform playerTransform;			// Target Object to follow
-	
+
 	private Vector3 directionOfPlayer;		
 	
 	private Vector3 origRotation;
@@ -24,7 +24,6 @@ public class EnemyMovement : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		theEnemyMover = this.GetComponent<Rigidbody2D> ();
 		playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 		origRotation = this.transform.eulerAngles;
 		health = 70;
