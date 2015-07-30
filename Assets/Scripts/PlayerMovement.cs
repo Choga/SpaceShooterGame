@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
 	public GameObject bullet;
 	public GameObject explosion;
+	public GameObject healthShower;
 
 	public GameObject projectile;
 	public float speed;
@@ -17,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
 	private float shotTimer;
 	private float firingRate;
 
+	private HealthBar healthBar;
+
 
 	// Use this for initialization
 	void Start () 
@@ -24,9 +27,11 @@ public class PlayerMovement : MonoBehaviour
 		playerMover = this.GetComponent<Rigidbody2D> ();
 
 		origRotation = this.transform.eulerAngles;
-		health = 70;
+		health = 100;
 		timer = 0;
 		firingRate = 0.5f;
+
+		healthBar = healthShower.GetComponent<HealthBar> ();
 	}
 	
 	// Update is called once per frame
@@ -49,15 +54,22 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 
+		applyDamage (0.5f);
 	}
 
 	public void applyDamage(float damage) {
 		health -= damage;
 		
 		if (health <= 0) {
-			Destroy (this.gameObject);
 			ExplosionHandler.createAndDestroyExplosion (this.gameObject.transform.position, explosion);
+			health = 100;
 		}
-		
+
+		healthBar.setHealth (health);
+	}
+
+	public float getHealth()
+	{
+		return health;
 	}
 }
