@@ -9,7 +9,7 @@ public class EnemyMovement : MonoBehaviour
 	
 	private Rigidbody2D theEnemyMover;
 	
-	private Transform playerTransform; // Target Object to follow
+	private Transform playerTransform; 			// Target Object to follow
 	
 	private Vector3 directionOfPlayer;
 
@@ -30,7 +30,7 @@ public class EnemyMovement : MonoBehaviour
 	{
 		playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 		origRotation = this.transform.eulerAngles;
-		health = 70;
+		health = 10;
 		size = 5;
 		shipClass = 6;
 	}
@@ -79,6 +79,7 @@ public class EnemyMovement : MonoBehaviour
 			Destroy (this.gameObject);
 			ExplosionHandler.createAndDestroyExplosion (this.gameObject.transform.position, explosion);
 			spawnLoot ();
+			EnemyManager.decrementEnemyCount(1);
 		}
 		
 	}

@@ -50,9 +50,8 @@ public class PlayerMovement : MonoBehaviour
 		float xInput = Input.GetAxis ("Horizontal");
 		float yInput = Input.GetAxis("Vertical");
 
-		playerMover.velocity = new Vector2 (xInput * currSpeed, yInput * currSpeed);
-
-		//this.transform.eulerAngles = new Vector3 (origRotation.x, origRotation.y, Mathf.Atan2(xInput, yInput) * 180 / Mathf.PI);
+		playerMover.velocity = new Vector2 (xInput * currSpeed, yInput * currSpeed);	// Velocity
+		playerMover.rotation = Mathf.Atan2(xInput, yInput) * -180 / Mathf.PI;			// Rotation
 
 		timer -= Time.deltaTime;
 		if(Input.GetButton ("Fire1")) {
