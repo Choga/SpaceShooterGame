@@ -17,6 +17,11 @@ public class PlayerMovement : MonoBehaviour
 	private float shotTimer;
 	private float firingRate;
 
+	private int capacity;
+	private int currentSize;
+
+	private string[] manifest;
+
 
 	// Use this for initialization
 	void Start () 
@@ -27,6 +32,10 @@ public class PlayerMovement : MonoBehaviour
 		health = 70;
 		timer = 0;
 		firingRate = 0.5f;
+		capacity = 2;
+		currentSize = 0;
+
+		manifest = new string[capacity];
 	}
 	
 	// Update is called once per frame
@@ -51,6 +60,10 @@ public class PlayerMovement : MonoBehaviour
 
 	}
 
+	public bool isFull() {
+		return capacity == currentSize;
+	}
+
 	public void applyDamage(float damage) {
 		health -= damage;
 		
@@ -58,6 +71,14 @@ public class PlayerMovement : MonoBehaviour
 			Destroy (this.gameObject);
 			ExplosionHandler.createAndDestroyExplosion (this.gameObject.transform.position, explosion);
 		}
-		
+	}
+
+	public void addLoot(string newLoot) {
+		manifest[currentSize++] = newLoot;
+		string manifestString = "MANIFEST: ";
+		foreach (string loot in manifest) {
+			manifestString += loot + "; ";
+		}
+		Debug.Log (manifestString);
 	}
 }
