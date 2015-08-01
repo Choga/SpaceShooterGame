@@ -18,6 +18,10 @@ public class PlayerMovement : MonoBehaviour
 	private float shotTimer;
 	private float firingRate;
 
+	private int capacity;
+	private int currentSize;
+
+	private string[] manifest;
 	private HealthBar healthBar;
 
 
@@ -30,6 +34,10 @@ public class PlayerMovement : MonoBehaviour
 		health = 100;
 		timer = 0;
 		firingRate = 0.5f;
+		capacity = 2;
+		currentSize = 0;
+
+		manifest = new string[capacity];
 
 		healthBar = healthShower.GetComponent<HealthBar> ();
 	}
@@ -55,6 +63,10 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 
+	public bool isFull() {
+		return capacity == currentSize;
+	}
+
 	public void applyDamage(float damage) {
 		health -= damage;
 		
@@ -64,6 +76,15 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 		healthBar.setHealth (health);
+	}
+
+	public void addLoot(string newLoot) {
+		manifest[currentSize++] = newLoot;
+		string manifestString = "MANIFEST: ";
+		foreach (string loot in manifest) {
+			manifestString += loot + "; ";
+		}
+		Debug.Log (manifestString);
 	}
 
 	public float getHealth()
