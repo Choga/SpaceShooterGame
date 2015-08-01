@@ -53,8 +53,6 @@ public class PlayerMovement : MonoBehaviour
 				timer = firingRate;
 			}
 		}
-
-		applyDamage (0.5f);
 	}
 
 	public void applyDamage(float damage) {
