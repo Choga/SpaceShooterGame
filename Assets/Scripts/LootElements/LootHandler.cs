@@ -4,6 +4,7 @@ using System.Collections;
 public class LootHandler : MonoBehaviour {
 
 	public GameObject[] allLootTypes;
+	public static string[] allLootNames = {"Engine", "Guns", "Diamond", "Platinum", "PlanetCore"};
 	
 	private bool addToShip;
 	private int shipClass;

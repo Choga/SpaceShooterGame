@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 	private float firingRate;
 
 	private int capacity;
-	private int currentSize;
+	private int currentManifestSize;
 
 	private string[] manifest;
 	private HealthBar healthBar;
@@ -35,9 +35,15 @@ public class PlayerMovement : MonoBehaviour
 		timer = 0;
 		firingRate = 0.5f;
 		capacity = 2;
-		currentSize = 0;
+		currentManifestSize = 0;
 
 		manifest = new string[capacity];
+
+		// Make sure manifest starts empty of garbage
+		for (int i = 0; i < capacity; i++) 
+		{
+			manifest[i] = null;
+		}
 
 		healthBar = healthShower.GetComponent<HealthBar> ();
 	}
@@ -52,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
 		playerMover.velocity = new Vector2 (xInput * currSpeed, yInput * currSpeed);	// Velocity
 		playerMover.rotation = Mathf.Atan2(xInput, yInput) * -180 / Mathf.PI;			// Rotation
-
+		
 		timer -= Time.deltaTime;
 		if(Input.GetButton ("Fire1")) {
 			if(timer <= 0) {
@@ -63,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 	public bool isFull() {
-		return capacity == currentSize;
+		return capacity <= currentManifestSize;
 	}
 
 	public void applyDamage(float damage) {
@@ -76,14 +82,19 @@ public class PlayerMovement : MonoBehaviour
 
 		healthBar.setHealth (health);
 	}
-
-	public void addLoot(string newLoot) {
-		manifest[currentSize++] = newLoot;
-		string manifestString = "MANIFEST: ";
-		foreach (string loot in manifest) {
-			manifestString += loot + "; ";
+	// Adds loot to player manifest if player can hold it, returns if successful
+	public bool addLoot(string newLoot) {
+		if (!isFull ()) {
+			manifest [currentManifestSize++] = newLoot;
+			string manifestString = "MANIFEST: ";
+			foreach (string loot in manifest) {
+				manifestString += loot + "; ";
+			}
+			Debug.Log (manifestString);
+			return true;
+		} else {
+			return false;
 		}
-		Debug.Log (manifestString);
 	}
 
 	public float getHealth()
@@ -96,5 +107,18 @@ public class PlayerMovement : MonoBehaviour
 		if (collision.gameObject.tag == "Enemy") {
 			collision.gameObject.BroadcastMessage ("applyDamage", .1f);
 		}
+	}
+
+	// Used to clear manifest and put it in the bank
+	public string[] bankManifest()
+	{
+		// Make sure manifest is cleared
+		currentManifestSize = 0;
+		// Keep the old array to return for the bank
+		string[] retVal = manifest;
+		// Make a new manifest so old values don't stick around
+		manifest = new string[capacity];
+
+		return retVal;
 	}
 }

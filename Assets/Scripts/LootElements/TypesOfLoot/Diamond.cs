@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Diamond : Loot {
 
-	private string type = "Diamond";
+	private string type = LootHandler.allLootNames[2];
 	public override string getType(){
 		return type;
 	}
