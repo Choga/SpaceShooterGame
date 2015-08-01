@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 	public GameObject projectile;
 	public float speed;
 
-	private static Rigidbody2D playerMover;
+	private Rigidbody2D playerMover;
 	private Vector3 origRotation;
 
 	private float health;
@@ -60,12 +60,6 @@ public class PlayerMovement : MonoBehaviour
 				timer = firingRate;
 			}
 		}
-	}
-
-	// Returns the RigidBody2D
-	public static Rigidbody2D getPlayerMover() 
-	{
-		return playerMover;
 	}
 
 	public bool isFull() {

@@ -4,8 +4,10 @@ using System.Collections;
 public class EnemyMovement : MonoBehaviour 
 {
 	public GameObject explosion;
-	public GameObject loot;
 	public float speed;
+	public GameObject lootHandlerObject;
+
+	private LootHandler lootHandler;
 	
 	private Rigidbody2D theEnemyMover;
 	
@@ -33,6 +35,8 @@ public class EnemyMovement : MonoBehaviour
 		health = 10;
 		size = 5;
 		shipClass = 6;
+
+		lootHandler = lootHandlerObject.GetComponent<LootHandler> ();
 	}
 	
 	// Update is called once per frame
@@ -96,8 +100,11 @@ public class EnemyMovement : MonoBehaviour
 		float deltaX = size / (enemyMeshSizeX * this.gameObject.transform.localScale.x);
 		position.x = position.x - (enemyMeshSizeX);
 		for (int i = 0; i < size; i++) {
-			LootHandler lootHandler = (LootHandler)(((GameObject)Instantiate (loot, position, Quaternion.identity)).GetComponent ("LootHandler"));
-			lootHandler.setClass (shipClass);
+			// Getting random loot from our loot handler
+			GameObject loot = lootHandler.getRandomLoot(shipClass);
+			// Spawning loot on the screen at right position
+			Instantiate(loot, position , Quaternion.identity);
+			// Moving loot
 			position.x = position.x + deltaX;
 		}
 	}
