@@ -58,7 +58,14 @@ public class PlayerMovement : MonoBehaviour
 
 		playerMover.velocity = new Vector2 (xInput * currSpeed, yInput * currSpeed);	// Velocity
 		playerMover.rotation = Mathf.Atan2(xInput, yInput) * -180 / Mathf.PI;			// Rotation
-		
+
+
+		// When either x or y isn't 0
+		if (xInput != 0 || yInput != 0) {
+			playerMover.rotation = Mathf.Atan2(xInput, yInput) * -180 / Mathf.PI;		// Rotation
+		}
+	
+
 		timer -= Time.deltaTime;
 		if(Input.GetButton ("Fire1")) {
 			if(timer <= 0) {
