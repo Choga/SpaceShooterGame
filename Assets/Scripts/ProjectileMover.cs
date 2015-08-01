@@ -24,12 +24,12 @@ public class ProjectileMover : MonoBehaviour {
 
 		player = GameObject.FindGameObjectWithTag ("Player");	// Get the Player
 
-		this.transform.position = player.transform.position + new Vector3 (0, 0, 0); // Initial position for the projectile
+		this.transform.position = player.transform.position + new Vector3 (0, 2, 0); // Initial position for the projectile
 
 		projectileMover = this.GetComponent<Rigidbody2D> ();
 
 		// Velocity according to player's rotation
-		projectileMover.velocity = player.	transform.rotation * Vector3.forward;
+		projectileMover.velocity = player.transform.rotation * Vector3.forward;
 		projectileMover.velocity = projectileMover.velocity + projectileSpeed * projectileMover.velocity.normalized;	
 
 	}
