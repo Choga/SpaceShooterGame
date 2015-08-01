@@ -41,7 +41,7 @@ public class ProjectileMover : MonoBehaviour {
 	{
 		explosion.transform.position = this.gameObject.transform.position;
 		ExplosionHandler.createAndDestroyExplosion (this.gameObject.transform.position, explosion);
-		if (collision.gameObject.tag == "Enemy") {
+		if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player") {
 			collision.gameObject.BroadcastMessage ("applyDamage", damage);
 		}
 		Destroy (this.gameObject);

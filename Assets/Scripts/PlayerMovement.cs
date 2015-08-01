@@ -90,4 +90,11 @@ public class PlayerMovement : MonoBehaviour
 	{
 		return health;
 	}
+
+	public void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (collision.gameObject.tag == "Enemy") {
+			collision.gameObject.BroadcastMessage ("applyDamage", .1f);
+		}
+	}
 }

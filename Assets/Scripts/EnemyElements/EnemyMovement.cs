@@ -83,14 +83,20 @@ public class EnemyMovement : MonoBehaviour
 		}
 		
 	}
-
+	
+	public void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (collision.gameObject.tag == "Player") {
+			collision.gameObject.BroadcastMessage ("applyDamage", 0.1f);
+		}
+	}
 	void spawnLoot() {
 		Vector3 position = this.gameObject.transform.position;
 		float enemyMeshSizeX = this.gameObject.GetComponent<MeshFilter> ().mesh.bounds.size.x;
-		float deltaX = size/(enemyMeshSizeX * this.gameObject.transform.localScale.x);
+		float deltaX = size / (enemyMeshSizeX * this.gameObject.transform.localScale.x);
 		position.x = position.x - (enemyMeshSizeX);
 		for (int i = 0; i < size; i++) {
-			LootHandler lootHandler = (LootHandler) (((GameObject)Instantiate(loot, position, Quaternion.identity)).GetComponent ("LootHandler"));
+			LootHandler lootHandler = (LootHandler)(((GameObject)Instantiate (loot, position, Quaternion.identity)).GetComponent ("LootHandler"));
 			lootHandler.setClass (shipClass);
 			position.x = position.x + deltaX;
 		}
