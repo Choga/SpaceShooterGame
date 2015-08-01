@@ -18,8 +18,7 @@ public class ProjectileMover : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-
-		projectileSpeed = 20;
+		projectileSpeed = 40;
 		damage = 10;
 		maxDistance = 50;
 
@@ -29,19 +28,9 @@ public class ProjectileMover : MonoBehaviour {
 
 		projectileMover = this.GetComponent<Rigidbody2D> ();
 
-		Vector2 playerVelocity = player.GetComponent<Rigidbody2D>().velocity;
-
-		if (playerVelocity.Equals (new Vector2 (0, 0))) 
-		{ 	
-			// If player is not moving
-			projectileMover.velocity = new Vector2 (0, projectileSpeed);
-		} 
-		else 
-		{
-			// Shoot direction of the player velocity
-			projectileMover.velocity = playerVelocity + projectileSpeed * playerVelocity.normalized;	
-		}
-
+		// Velocity according to player's rotation
+		projectileMover.velocity = player.	transform.rotation * Vector3.forward;
+		projectileMover.velocity = projectileMover.velocity + projectileSpeed * projectileMover.velocity.normalized;	
 
 	}
 	

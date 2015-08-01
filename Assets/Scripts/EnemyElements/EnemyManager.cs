@@ -7,7 +7,7 @@ public class EnemyManager : MonoBehaviour
 	public float spawnTime = 3f;            // How long between each spawn.
 	public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
 	private float spawnShell = 10f;			// Shell width around player where enemies can spawn
-	private static int maxEnemyCount = 5;	// Max amount of enemies
+	private static int maxEnemyCount = 10;	// Max amount of enemies
 	private static int enemyCount = 0;			// Current amount of enemies
 	void Start ()
 	{
