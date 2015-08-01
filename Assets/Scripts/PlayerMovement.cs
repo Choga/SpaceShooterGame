@@ -74,8 +74,8 @@ public class PlayerMovement : MonoBehaviour
 			ExplosionHandler.createAndDestroyExplosion (this.gameObject.transform.position, explosion);
 			health = 100;
 		}
-		healthBar.setHealth (health);
 
+		healthBar.setHealth (health);
 	}
 
 	public void addLoot(string newLoot) {
