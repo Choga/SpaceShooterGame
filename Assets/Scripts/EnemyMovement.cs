@@ -54,8 +54,8 @@ public class EnemyMovement : MonoBehaviour
 			Quaternion enemyRotation = this.transform.rotation;                    
 			
 			
-			this.transform.Translate (directionOfPlayer * speed, Space.World); // Move enemey to player
-			this.transform.LookAt (playerTransform, worldUp);        // Points torwards Player
+			this.transform.Translate (directionOfPlayer * speed, Space.World); 	// Move enemey to player
+			this.transform.LookAt (playerTransform, worldUp);        			// Points torwards Player
 		} else if (!challenged) {
 
 			float speed = 5f;
