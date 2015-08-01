@@ -7,34 +7,51 @@ public class ProjectileMover : MonoBehaviour {
 
 	private Rigidbody2D projectileMover;
 
-	private float speed;
+	private float projectileSpeed;
 	public GameObject explosion;
 	private float damage;
+	private float maxDistance;
+
+	private float playerRotationX;
+	private float playerRotationY;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 
-		player = GameObject.FindGameObjectWithTag ("Player");
+		projectileSpeed = 20;
+		damage = 10;
+		maxDistance = 50;
 
-		this.transform.position = player.transform.position + new Vector3 (0, 2, 0);
+		player = GameObject.FindGameObjectWithTag ("Player");	// Get the Player
+
+		this.transform.position = player.transform.position + new Vector3 (0, 0, 0); // Initial position for the projectile
 
 		projectileMover = this.GetComponent<Rigidbody2D> ();
 
-		projectileMover.velocity = new Vector2 (0, 10);
+		Vector2 playerVelocity = player.GetComponent<Rigidbody2D>().velocity;
 
-		speed = 10;
-		damage = 10;
-	
+		if (playerVelocity.Equals (new Vector2 (0, 0))) 
+		{ 	
+			// If player is not moving
+			projectileMover.velocity = new Vector2 (0, projectileSpeed);
+		} 
+		else 
+		{
+			// Shoot direction of the player velocity
+			projectileMover.velocity = playerVelocity + projectileSpeed * playerVelocity.normalized;	
+		}
+
+
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		if (Vector2.Distance (this.transform.position, player.transform.position) > 50) 
+	if (Vector2.Distance (this.transform.position, player.transform.position) > maxDistance) 
 		{
 			Destroy (this.gameObject);
 		}
-		this.transform.position = new Vector2 (this.transform.position.x, this.transform.position.y + speed * Time.deltaTime);
 	}
 
 	public void OnCollisionEnter2D(Collision2D collision)
