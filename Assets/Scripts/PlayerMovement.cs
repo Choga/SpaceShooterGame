@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
 	public GameObject bullet;
 	public GameObject explosion;
+	public GameObject healthShower;
 
 	public GameObject projectile;
 	public float speed;
@@ -17,10 +18,14 @@ public class PlayerMovement : MonoBehaviour
 	private float shotTimer;
 	private float firingRate;
 
+<<<<<<< HEAD
 	private int capacity;
 	private int currentSize;
 
 	private string[] manifest;
+=======
+	private HealthBar healthBar;
+>>>>>>> origin/master
 
 
 	// Use this for initialization
@@ -29,13 +34,18 @@ public class PlayerMovement : MonoBehaviour
 		playerMover = this.GetComponent<Rigidbody2D> ();
 
 		origRotation = this.transform.eulerAngles;
-		health = 70;
+		health = 100;
 		timer = 0;
 		firingRate = 0.5f;
+<<<<<<< HEAD
 		capacity = 2;
 		currentSize = 0;
 
 		manifest = new string[capacity];
+=======
+
+		healthBar = healthShower.GetComponent<HealthBar> ();
+>>>>>>> origin/master
 	}
 	
 	// Update is called once per frame
@@ -57,7 +67,6 @@ public class PlayerMovement : MonoBehaviour
 				timer = firingRate;
 			}
 		}
-
 	}
 
 	public bool isFull() {
@@ -68,9 +77,10 @@ public class PlayerMovement : MonoBehaviour
 		health -= damage;
 		
 		if (health <= 0) {
-			Destroy (this.gameObject);
 			ExplosionHandler.createAndDestroyExplosion (this.gameObject.transform.position, explosion);
+			health = 100;
 		}
+<<<<<<< HEAD
 	}
 
 	public void addLoot(string newLoot) {
@@ -80,5 +90,14 @@ public class PlayerMovement : MonoBehaviour
 			manifestString += loot + "; ";
 		}
 		Debug.Log (manifestString);
+=======
+
+		healthBar.setHealth (health);
+	}
+
+	public float getHealth()
+	{
+		return health;
+>>>>>>> origin/master
 	}
 }
