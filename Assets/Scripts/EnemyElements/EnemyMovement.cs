@@ -3,8 +3,8 @@ using System.Collections;
 
 public class EnemyMovement : MonoBehaviour 
 {
-	public GameObject explosion;				// Explosion prefab 
 	public float speed;							// Speed of enemy
+	public GameObject explosion;				// Explosion prefab 
 	public GameObject lootHandlerObject;		// Loot handler GameObject
 
 	private LootHandler lootHandler;			// Loot handler
@@ -36,8 +36,8 @@ public class EnemyMovement : MonoBehaviour
 		playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 		origRotation = this.transform.eulerAngles;
 		health = 10f;
-		size = 5f;
-		shipClass = 6f;
+		size = 5;
+		shipClass = 6;
 		speed = 5f;
 
 		lootHandler = lootHandlerObject.GetComponent<LootHandler> ();

@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
 	public GameObject explosion;		// Explosion prefab
 	public GameObject healthShower;		
 
-	public GameObject projectile;
 	public float speed;					// Player speed
 
 	private Rigidbody2D playerMover;	// Player RigidBody2D
@@ -62,6 +61,12 @@ public class PlayerMovement : MonoBehaviour
 		// When either xInput or yInput isn't 0, recalculate rotation
 		if (xInput != 0 || yInput != 0) {
 			playerMover.rotation = Mathf.Atan2(xInput, yInput) * -180 / Mathf.PI;		// Rotation
+		}
+
+		//Press space to activate/deactivate upgrades
+		if (Input.GetButton ("Jump")) {
+			WeaponOneBehavior.upgradeDamage = !WeaponOneBehavior.upgradeDamage;
+			WeaponOneBehavior.upgradeSpeed = !WeaponOneBehavior.upgradeSpeed;
 		}
 
 		// Firing rate

@@ -399,8 +399,7 @@ MonoBehaviour:
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -597,6 +596,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!4 &576586611
 Transform:
   m_ObjectHideFlags: 0
@@ -640,13 +640,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f1c3665d4bfd46049a5ff8fde09769e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 121010, guid: b62a81972d7ab430580fdf308157b38d, type: 2}
+  bullet: {fileID: 139054, guid: 87aebb6e6d52f5842af75ea17938772a, type: 2}
   explosion: {fileID: 100012, guid: 384371afbb4354cc9a3fc68eab303756, type: 2}
   healthShower: {fileID: 68737840}
-  projectile: {fileID: 121010, guid: b62a81972d7ab430580fdf308157b38d, type: 2}
   speed: 500
 --- !u!50 &632945182
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -655,11 +655,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 0
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!60 &632945183
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1076,6 +1076,7 @@ MonoBehaviour:
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
+  m_RepeatDelay: .5
   m_AllowActivationOnMobileDevice: 0
 --- !u!114 &2014496803
 MonoBehaviour:

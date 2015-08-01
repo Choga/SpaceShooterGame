@@ -7,18 +7,18 @@ public class ProjectileMover : MonoBehaviour {
 
 	private Rigidbody2D projectileMover;	// RigidBody2D for projectile
 
-	private float projectileSpeed;			// Speed for projectile
+	protected float projectileSpeed;			// Speed for projectile
 
 	public GameObject explosion;			// Explosion prefab
 
-	private float damage;					// Damage the projectile does
+	protected float damage;					// Damage the projectile does
 
 	private float maxDistance;				// Maximum distance projectile can be from player
 
 	private Vector3 playerDirection;		// Player's direction
 
 	// Use this for initialization
-	void Start () 
+	protected virtual void Start () 
 	{
 		projectileSpeed = 40;
 		damage = 10;
