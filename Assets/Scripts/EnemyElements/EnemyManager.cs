@@ -8,7 +8,8 @@ public class EnemyManager : MonoBehaviour
 	public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
 	private float spawnShell = 10f;			// Shell width around player where enemies can spawn
 	private static int maxEnemyCount = 10;	// Max amount of enemies
-	private static int enemyCount = 0;			// Current amount of enemies
+	private static int enemyCount = 0;		// Current amount of enemies
+
 	void Start ()
 	{
 		// Call the Spawn function after a delay of the spawnTime and then continue to call after the same amount of time.
@@ -28,12 +29,14 @@ public class EnemyManager : MonoBehaviour
 		}
 	}
 
+	// Lower count by num
 	public static void decrementEnemyCount(int num) 
 	{
 		enemyCount -= num;
 		if (enemyCount < 0)
 			enemyCount = 0;
 	}
+	// Raise count by num
 	public static void incrementEnemyCount(int num) 
 	{
 		enemyCount += num;

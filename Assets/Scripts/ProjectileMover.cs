@@ -12,8 +12,7 @@ public class ProjectileMover : MonoBehaviour {
 	private float damage;
 	private float maxDistance;
 
-	private float playerRotationX;
-	private float playerRotationY;
+	private Vector3 playerDirection;
 
 	// Use this for initialization
 	void Start () 
@@ -24,14 +23,16 @@ public class ProjectileMover : MonoBehaviour {
 
 		player = GameObject.FindGameObjectWithTag ("Player");	// Get the Player
 
-		this.transform.position = player.transform.position + new Vector3 (0, 2, 0); // Initial position for the projectile
+		playerDirection = player.transform.rotation * Vector3.forward;
 
+		// Initial position for the projectile
+		this.transform.position = player.transform.position + playerDirection; 
+
+		// RigidBody2D
 		projectileMover = this.GetComponent<Rigidbody2D> ();
 
 		// Velocity according to player's rotation
-		projectileMover.velocity = player.transform.rotation * Vector3.forward;
-		projectileMover.velocity = projectileMover.velocity + projectileSpeed * projectileMover.velocity.normalized;	
-
+		projectileMover.velocity = playerDirection + projectileSpeed * playerDirection.normalized;	
 	}
 	
 	// Update is called once per frame
