@@ -9,30 +9,21 @@ public class EnemyMovement : MonoBehaviour
 	
 	private Rigidbody2D theEnemyMover;
 	
-<<<<<<< HEAD
 	private Transform playerTransform; // Target Object to follow
 	
 	private Vector3 directionOfPlayer;
-=======
-	private Transform playerTransform;			// Target Object to follow
 
-	private Vector3 directionOfPlayer;		
-	
->>>>>>> origin/master
 	private Vector3 origRotation;
 	
 	private float health;
 
-<<<<<<< HEAD
 	private int size;
 	private int shipClass;
-=======
 	bool challenged = false;					// Flag for enemy aggro
 
 	Vector3 worldUp = new Vector3(0f, 0f, 90f);	// World's "up" direction
 
->>>>>>> origin/master
-	
+
 
 	// Use this for initialization
 	void Start () 
