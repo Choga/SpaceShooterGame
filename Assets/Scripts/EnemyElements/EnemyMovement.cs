@@ -96,16 +96,23 @@ public class EnemyMovement : MonoBehaviour
 	}
 	void spawnLoot() {
 		Vector3 position = this.gameObject.transform.position;
+
 		float enemyMeshSizeX = this.gameObject.GetComponent<MeshFilter> ().mesh.bounds.size.x;
 		float deltaX = size / (enemyMeshSizeX * this.gameObject.transform.localScale.x);
+
 		position.x = position.x - (enemyMeshSizeX);
+
+		float randomRange = deltaX;
 		for (int i = 0; i < size; i++) {
+
+			// Random position for the loot defined by these
+			float current1 = (Random.Range (-1*randomRange, randomRange));
+			float current2 = (Random.Range (-1*randomRange, randomRange));
+
 			// Getting random loot from our loot handler
 			GameObject loot = lootHandler.getRandomLoot(shipClass);
-			// Spawning loot on the screen at right position
-			Instantiate(loot, position , Quaternion.identity);
-			// Moving loot
-			position.x = position.x + deltaX;
+			// Spawning loot on the screen at position altered by random value
+			Instantiate(loot, position + new Vector3(current1, current2, 0) , Quaternion.identity);
 		}
 	}
 }
