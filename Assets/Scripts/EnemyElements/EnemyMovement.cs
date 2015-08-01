@@ -75,4 +75,11 @@ public class EnemyMovement : MonoBehaviour
 		}
 		
 	}
+
+	public void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (collision.gameObject.tag == "Player") {
+			collision.gameObject.BroadcastMessage ("applyDamage", 0.1f);
+		}
+	}
 }
