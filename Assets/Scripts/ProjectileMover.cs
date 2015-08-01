@@ -3,16 +3,19 @@ using System.Collections;
 
 public class ProjectileMover : MonoBehaviour {
 	 
-	private GameObject player;
+	private GameObject player;				// Player GameObject
 
-	private Rigidbody2D projectileMover;
+	private Rigidbody2D projectileMover;	// RigidBody2D for projectile
 
-	private float projectileSpeed;
-	public GameObject explosion;
-	private float damage;
-	private float maxDistance;
+	private float projectileSpeed;			// Speed for projectile
 
-	private Vector3 playerDirection;
+	public GameObject explosion;			// Explosion prefab
+
+	private float damage;					// Damage the projectile does
+
+	private float maxDistance;				// Maximum distance projectile can be from player
+
+	private Vector3 playerDirection;		// Player's direction
 
 	// Use this for initialization
 	void Start () 
@@ -38,7 +41,8 @@ public class ProjectileMover : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-	if (Vector2.Distance (this.transform.position, player.transform.position) > maxDistance) 
+		// Distance from player is too far
+		if (Vector2.Distance (this.transform.position, player.transform.position) > maxDistance) 
 		{
 			Destroy (this.gameObject);
 		}
@@ -46,11 +50,17 @@ public class ProjectileMover : MonoBehaviour {
 
 	public void OnCollisionEnter2D(Collision2D collision)
 	{
+		// Explosion location where player is
 		explosion.transform.position = this.gameObject.transform.position;
+
+		// Pass to ExplosionHandler to create explosion
 		ExplosionHandler.createAndDestroyExplosion (this.gameObject.transform.position, explosion);
+
+		// Apply the projectile damage to the object
 		if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player") {
 			collision.gameObject.BroadcastMessage ("applyDamage", damage);
 		}
-		Destroy (this.gameObject);
+
+		Destroy (this.gameObject);	// Destroy projectile after collision
 	}
 }

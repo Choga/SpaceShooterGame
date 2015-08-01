@@ -3,23 +3,24 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour 
 {
-	public GameObject bullet;
-	public GameObject explosion;
-	public GameObject healthShower;
+	public GameObject bullet;			// Bullet prefab
+	public GameObject explosion;		// Explosion prefab
+	public GameObject healthShower;		
 
 	public GameObject projectile;
-	public float speed;
+	public float speed;					// Player speed
 
-	private Rigidbody2D playerMover;
-	private Vector3 origRotation;
+	private Rigidbody2D playerMover;	// Player RigidBody2D
+	private Vector3 origRotation;		// Original rotation
 
-	private float health;
-	private float timer;
+	private float health;				// Player health
+
+	private float timer;				// For firing rate
 	private float shotTimer;
 	private float firingRate;
 
-	private int capacity;
-	private int currentManifestSize;
+	private int capacity;				// Player capacity 
+	private int currentManifestSize;	// Player current manifest size
 
 	private string[] manifest;
 	private HealthBar healthBar;
@@ -51,18 +52,19 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		float currSpeed = speed * Time.deltaTime;
+		float currSpeed = speed * Time.deltaTime;		// Current Speed
 
-		float xInput = Input.GetAxis ("Horizontal");
+		float xInput = Input.GetAxis ("Horizontal");	// Inputs
 		float yInput = Input.GetAxis("Vertical");
 
 		playerMover.velocity = new Vector2 (xInput * currSpeed, yInput * currSpeed);	// Velocity
 
-		// When either x or y isn't 0, recalculate rotation
+		// When either xInput or yInput isn't 0, recalculate rotation
 		if (xInput != 0 || yInput != 0) {
 			playerMover.rotation = Mathf.Atan2(xInput, yInput) * -180 / Mathf.PI;		// Rotation
 		}
 
+		// Firing rate
 		timer -= Time.deltaTime;
 		if(Input.GetButton ("Fire1")) {
 			if(timer <= 0) {
@@ -86,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
 
 		healthBar.setHealth (health);
 	}
+
 	// Adds loot to player manifest if player can hold it, returns if successful
 	public bool addLoot(string newLoot) {
 		if (!isFull ()) {

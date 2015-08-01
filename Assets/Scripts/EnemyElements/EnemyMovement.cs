@@ -3,24 +3,27 @@ using System.Collections;
 
 public class EnemyMovement : MonoBehaviour 
 {
-	public GameObject explosion;
-	public float speed;
-	public GameObject lootHandlerObject;
+	public GameObject explosion;				// Explosion prefab 
+	public float speed;							// Speed of enemy
+	public GameObject lootHandlerObject;		// Loot handler GameObject
 
-	private LootHandler lootHandler;
+	private LootHandler lootHandler;			// Loot handler
 	
-	private Rigidbody2D theEnemyMover;
+	private Rigidbody2D theEnemyMover;			// Enemy RigidBody2D
 	
 	private Transform playerTransform; 			// Target Object to follow
 	
-	private Vector3 directionOfPlayer;
+	private Vector3 directionOfPlayer;			// Direction of player
 
-	private Vector3 origRotation;
+	private Vector3 origRotation;				// Original rotation
 	
 	private float health;
 
-	private int size;
-	private int shipClass;
+	private float minChallengeDistance = 10f;	// Aggro distance
+	private float maxChallengeDistance = 15f;	// Max aggro distance
+
+	private int size;							// Size
+	private int shipClass;						// Ship class
 	bool challenged = false;					// Flag for enemy aggro
 
 	Vector3 worldUp = new Vector3(0f, 0f, 90f);	// World's "up" direction
@@ -32,9 +35,10 @@ public class EnemyMovement : MonoBehaviour
 	{
 		playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 		origRotation = this.transform.eulerAngles;
-		health = 10;
-		size = 5;
-		shipClass = 6;
+		health = 10f;
+		size = 5f;
+		shipClass = 6f;
+		speed = 5f;
 
 		lootHandler = lootHandlerObject.GetComponent<LootHandler> ();
 	}
@@ -42,59 +46,50 @@ public class EnemyMovement : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
+		// Distance of enemy from player
 		float distance = Vector3.Distance (this.transform.position, playerTransform.transform.position);
 
-		if (distance < 5f) 
+		if (distance < minChallengeDistance) 
 			challenged = true;
-		else if (distance > 10f) 
+		else if (distance > maxChallengeDistance) 
 			challenged = false;
 
 		// Actions when enemy is challenged
 		if (challenged) {
 			directionOfPlayer = (playerTransform.position - this.transform.position).normalized;	// Get direction to move towards			
 
-			float playerX = playerTransform.position.x;
-			float playerY = playerTransform.position.y;
-			float playerZ = playerTransform.position.z;
-			Quaternion playerRotation = playerTransform.rotation;
-			
-			float enemyX = this.transform.position.x;
-			float enemyY = this.transform.position.y;
-			float enemyZ = this.transform.position.z;
-			Quaternion enemyRotation = this.transform.rotation;                    
-			
-			
 			this.transform.Translate (directionOfPlayer * speed, Space.World); 	// Move enemey to player
 			this.transform.LookAt (playerTransform, worldUp);        			// Points torwards Player
 		} else if (!challenged) {
 
-			float speed = 5f;
-			Vector2 vel;
-
-			vel = Random.insideUnitCircle * speed;
-			this.transform.Translate (vel * Time.deltaTime, Space.World);
+			// Random idle animations 
 		}
 	}
-	
-	public void applyDamage(float damage) {
+
+	// Apply damage, destroy if appropriate 
+	public void applyDamage(float damage) 
+	{
 		health -= damage;
 
 		if (health <= 0) {
 			Destroy (this.gameObject);
 			ExplosionHandler.createAndDestroyExplosion (this.gameObject.transform.position, explosion);
-			spawnLoot ();
-			EnemyManager.decrementEnemyCount(1);
+			spawnLoot ();							// Looot
+			EnemyManager.decrementEnemyCount(1);	// Decrement the count of enemies in the manager
 		}
 		
 	}
 	
 	public void OnCollisionEnter2D(Collision2D collision)
 	{
+		// If colliding with player
 		if (collision.gameObject.tag == "Player") {
-			collision.gameObject.BroadcastMessage ("applyDamage", 0.1f);
+			collision.gameObject.BroadcastMessage ("applyDamage", 0.1f);	
 		}
 	}
-	void spawnLoot() {
+
+	void spawnLoot() 
+	{
 		Vector3 position = this.gameObject.transform.position;
 
 		float enemyMeshSizeX = this.gameObject.GetComponent<MeshFilter> ().mesh.bounds.size.x;
