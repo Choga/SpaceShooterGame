@@ -9,9 +9,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 474374}
   - 33: {fileID: 3365424}
-  - 65: {fileID: 6548458}
   - 23: {fileID: 2305880}
   - 114: {fileID: 11431620}
+  - 50: {fileID: 5085330}
+  - 61: {fileID: 6148310}
   m_Layer: 0
   m_Name: Diamond
   m_TagString: Loot
@@ -62,18 +63,35 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 158638}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &6548458
-BoxCollider:
+--- !u!50 &5085330
+Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 158638}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &6148310
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158638}
   m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1}
 --- !u!114 &11431620
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -95,6 +113,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Loot
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -9,9 +9,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 479758}
   - 33: {fileID: 3328754}
-  - 136: {fileID: 13639012}
   - 23: {fileID: 2322150}
   - 114: {fileID: 11430612}
+  - 50: {fileID: 5044164}
+  - 60: {fileID: 6034958}
   m_Layer: 0
   m_Name: PlanetCore
   m_TagString: Loot
@@ -62,6 +63,40 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150488}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!50 &5044164
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150488}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!60 &6034958
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150488}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: 5.96046448e-08, y: 1}
+      - {x: .9510566, y: .309016973}
+      - {x: .587785244, y: -.809017062}
+      - {x: -.587785304, y: -.809016943}
+      - {x: -.951056421, y: .309017122}
 --- !u!114 &11430612
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,19 +108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbc5408b11c84d059a3c9e1658ac83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &13639012
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 150488}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: .5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -96,6 +118,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Loot
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
