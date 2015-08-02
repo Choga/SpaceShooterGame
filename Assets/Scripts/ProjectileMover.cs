@@ -48,7 +48,7 @@ public class ProjectileMover : MonoBehaviour {
 		}
 	}
 
-	public void OnCollisionEnter2D(Collision2D collision)
+	public virtual void OnCollisionEnter2D(Collision2D collision)
 	{
 		// Explosion location where player is
 		explosion.transform.position = this.gameObject.transform.position;

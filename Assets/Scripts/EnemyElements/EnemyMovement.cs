@@ -54,8 +54,8 @@ public class EnemyMovement : MonoBehaviour
 		if (challenged) {
 			directionOfPlayer = (playerTransform.position - this.transform.position).normalized;	// Get direction to move towards			
 
-			this.transform.Translate (directionOfPlayer * speed, Space.World); 	// Move enemey to player
-			this.transform.LookAt (playerTransform, worldUp);        			// Points torwards Player
+			this.transform.Translate (directionOfPlayer * speed * Time.deltaTime, Space.World); 	// Move enemey to player
+			this.transform.LookAt (playerTransform, worldUp);	      			// Points torwards Player
 		} else if (!challenged) {
 
 			// Random idle animations 

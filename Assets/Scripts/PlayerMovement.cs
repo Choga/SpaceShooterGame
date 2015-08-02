@@ -65,8 +65,8 @@ public class PlayerMovement : MonoBehaviour
 
 		//Press space to activate/deactivate upgrades
 		if (Input.GetButton ("Jump")) {
-			WeaponOneBehavior.upgradeDamage = !WeaponOneBehavior.upgradeDamage;
-			WeaponOneBehavior.upgradeSpeed = !WeaponOneBehavior.upgradeSpeed;
+			PeaShooterBehavior.upgradeDamage = !PeaShooterBehavior.upgradeDamage;
+			PeaShooterBehavior.upgradeSpeed = !PeaShooterBehavior.upgradeSpeed;
 		}
 
 		// Firing rate

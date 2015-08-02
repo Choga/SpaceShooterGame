@@ -25,7 +25,6 @@ public class LootHandler : MonoBehaviour {
 				//of the resources folder will require the argument of this function get changed or a 
 				//new means of loading the loot into allLootTypes.
 				allLootTypes[i] = (GameObject) Resources.Load (allLootNames[i]);
-				Debug.Log (allLootTypes[i].name);
 			}
 		}
 
