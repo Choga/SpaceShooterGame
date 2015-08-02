@@ -29,7 +29,7 @@ public class PassThroughBehavior : ProjectileMover {
 		// Apply the projectile damage to the object
 		if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player") {
 			collision.gameObject.BroadcastMessage ("applyDamage", damage);
-			if(maxPassThroughs > 0) {
+			if(maxPassThroughs-- > 0) {
 				damage += damageBoost;
 				projectileSpeed -= speedReduction;
 			} else {
