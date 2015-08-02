@@ -152,7 +152,7 @@ RectTransform:
   m_GameObject: {fileID: 90323298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 1569699882}
   m_RootOrder: 2
@@ -596,7 +596,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
-  m_StereoMirrorMode: 0
 --- !u!4 &576586611
 Transform:
   m_ObjectHideFlags: 0
@@ -646,7 +645,6 @@ MonoBehaviour:
   speed: 500
 --- !u!50 &632945182
 Rigidbody2D:
-  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -655,11 +653,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 0
+  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!60 &632945183
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -836,6 +834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storeUI: {fileID: 1569699881}
+  bankText: {fileID: 90323300}
 --- !u!1 &1569699881
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,7 +1075,6 @@ MonoBehaviour:
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
-  m_RepeatDelay: .5
   m_AllowActivationOnMobileDevice: 0
 --- !u!114 &2014496803
 MonoBehaviour:

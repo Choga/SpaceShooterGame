@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 		health = 100;
 		timer = 0;
 		firingRate = 0.5f;
-		capacity = 2;
+		capacity = 10;
 		currentManifestSize = 0;
 
 		manifest = new string[capacity];
