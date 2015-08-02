@@ -5,9 +5,6 @@ public class EnemyMovement : MonoBehaviour
 {
 	public float speed;							// Speed of enemy
 	public GameObject explosion;				// Explosion prefab 
-	public GameObject lootHandlerObject;		// Loot handler GameObject
-
-	private LootHandler lootHandler;			// Loot handler
 	
 	private Rigidbody2D theEnemyMover;			// Enemy RigidBody2D
 	
@@ -39,8 +36,7 @@ public class EnemyMovement : MonoBehaviour
 		size = 5;
 		shipClass = 6;
 		speed = 5f;
-
-		lootHandler = lootHandlerObject.GetComponent<LootHandler> ();
+	
 	}
 	
 	// Update is called once per frame
@@ -105,7 +101,7 @@ public class EnemyMovement : MonoBehaviour
 			float current2 = (Random.Range (-1*randomRange, randomRange));
 
 			// Getting random loot from our loot handler
-			GameObject loot = lootHandler.getRandomLoot(shipClass);
+			GameObject loot = LootHandler.getRandomLoot(shipClass);
 			// Spawning loot on the screen at position altered by random value
 			Instantiate(loot, position + new Vector3(current1, current2, 0) , Quaternion.identity);
 		}

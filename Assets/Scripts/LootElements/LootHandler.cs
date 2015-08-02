@@ -8,12 +8,12 @@ public class LootHandler : MonoBehaviour {
 	
 	private bool addToShip;
 	private int shipClass;
-
+	
 	public void setClass(int newClass) {
 		shipClass = newClass;
 	}
 
-	public GameObject getRandomLoot(int shipClass) {
+	public static GameObject getRandomLoot(int shipClass) {
 
 		//Initializes allLootTypes if not previously initialized
 		if (allLootTypes == null) {
@@ -31,16 +31,11 @@ public class LootHandler : MonoBehaviour {
 
 		// Getting random value for the loot spawn
 		int current = (int)(Random.Range (0, shipClass-1));
-		switch (current) {
-		case 0:
-			return allLootTypes[0];
-		case 1:
-			return allLootTypes[1];
-		case 2:
-			return allLootTypes[2];
-		case 3:
-			return allLootTypes[3];
-		default:
+
+		// return type of loot, or default back to 4
+		if (current < 4) {
+			return allLootTypes [current];
+		} else {
 			return allLootTypes[4];
 		}
 	}
