@@ -80,7 +80,6 @@ public class HubWorld : MonoBehaviour {
 			lootText.Append(bank[lootItem]);
 			// New line so next text will appear in organized fasion
 			lootText.Append("\n");
-			Debug.Log("putting in " + lootItem);
 		}
 		// After building the text we display it on the screen
 		bankText.text = lootText.ToString();

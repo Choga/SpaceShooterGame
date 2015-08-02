@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
 	public float speed;					// Player speed
 
 	private Rigidbody2D playerMover;	// Player RigidBody2D
-	private Vector3 origRotation;		// Original rotation
 
 	private float health;				// Player health
 
@@ -30,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
 	{
 		playerMover = this.GetComponent<Rigidbody2D> ();
 
-		origRotation = this.transform.eulerAngles;
 		health = 100;
 		timer = 0;
 		firingRate = 0.5f;

@@ -12,8 +12,6 @@ public class EnemyMovement : MonoBehaviour
 	
 	private Vector3 directionOfPlayer;			// Direction of player
 
-	private Vector3 origRotation;				// Original rotation
-	
 	private float health;
 
 	private float minChallengeDistance = 10f;	// Aggro distance
@@ -31,7 +29,6 @@ public class EnemyMovement : MonoBehaviour
 	void Start () 
 	{
 		playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-		origRotation = this.transform.eulerAngles;
 		health = 10f;
 		size = 5;
 		shipClass = 6;
