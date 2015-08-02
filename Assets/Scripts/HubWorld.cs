@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 public class HubWorld : MonoBehaviour {
 
 	public GameObject storeUI;
+	public Text bankText;
+
 	private bool storeSpawned = false;
 
 	private int engine;
@@ -64,11 +68,22 @@ public class HubWorld : MonoBehaviour {
 				}
 			}
 		}
-		
+		// Build the text that will tell the user what kinds of loot they have
+		StringBuilder lootText = new StringBuilder();
 		foreach(string lootItem in bank.Keys)
 		{
-			Debug.Log(lootItem + " : " + bank[lootItem]);
+			// Loot name
+			lootText.Append(lootItem);
+			// : to signify how many you have
+			lootText.Append(" : ");
+			// How many are in the bank right now
+			lootText.Append(bank[lootItem]);
+			// New line so next text will appear in organized fasion
+			lootText.Append("\n");
+			Debug.Log("putting in " + lootItem);
 		}
+		// After building the text we display it on the screen
+		bankText.text = lootText.ToString();
 	}
 
 	// Creates the GUI
