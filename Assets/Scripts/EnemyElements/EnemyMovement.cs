@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EnemyMovement : MonoBehaviour 
 {
+	public GameObject bullet;					// Bullet prefab
 	public float speed;							// Speed of enemy
 	public GameObject explosion;				// Explosion prefab 
 	
@@ -23,7 +24,8 @@ public class EnemyMovement : MonoBehaviour
 
 	Vector3 worldUp = new Vector3(0f, 0f, 90f);	// World's "up" direction
 
-
+	private float timer;						// For firing rate
+	private float firingRate;
 
 	// Use this for initialization
 	void Start () 
@@ -33,7 +35,8 @@ public class EnemyMovement : MonoBehaviour
 		size = 5;
 		shipClass = 6;
 		speed = 5f;
-	
+		timer = 0f;
+		firingRate = 5f;
 	}
 	
 	// Update is called once per frame
@@ -53,6 +56,35 @@ public class EnemyMovement : MonoBehaviour
 
 			this.transform.Translate (directionOfPlayer * speed * Time.deltaTime, Space.World); 	// Move enemey to player
 			this.transform.LookAt (playerTransform, worldUp);	      			// Points torwards Player
+		
+		
+			// Firing rate
+			timer -= Time.deltaTime;
+			// Always shooting
+			if(true) {
+				if(timer <= 0) {
+
+					Vector3 thisDirection = this.transform.rotation * Vector3.forward;
+					
+					// Initial position for the projectile
+					Vector3 intialPosition = this.transform.position + thisDirection;
+					
+					// Instantiate bullet with intialPosition and random rotation
+					GameObject bulletObject = (GameObject) Instantiate (bullet, intialPosition, Random.rotation);
+					
+					// Get the script
+					ProjectileMover projectileMover = (ProjectileMover) bulletObject.transform.GetComponent("ProjectileMover");
+					
+					// Set origin of the projectile
+					projectileMover.setOrigin(this.gameObject);
+					
+					projectileMover.fire();
+					
+					// Reset
+					timer = firingRate;
+				}
+			}
+		
 		} else if (!challenged) {
 
 			// Random idle animations 

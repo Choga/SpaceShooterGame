@@ -17,6 +17,9 @@ public class ProjectileMover : MonoBehaviour {
 
 	private Vector3 playerDirection;		// Player's direction
 
+	private GameObject origin;
+	private GameObject target;
+
 	// Use this for initialization
 	protected virtual void Start () 
 	{
@@ -28,24 +31,40 @@ public class ProjectileMover : MonoBehaviour {
 
 		playerDirection = player.transform.rotation * Vector3.forward;
 
-		// Initial position for the projectile
-		this.transform.position = player.transform.position + playerDirection; 
-
 		// RigidBody2D
 		projectileMover = this.GetComponent<Rigidbody2D> ();
-
-		// Velocity according to player's rotation
-		projectileMover.velocity = playerDirection + projectileSpeed * playerDirection.normalized;	
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
 		// Distance from player is too far
-		if (Vector2.Distance (this.transform.position, player.transform.position) > maxDistance) 
+		if (Vector2.Distance (this.transform.position, origin.transform.position) > maxDistance) 
 		{
 			Destroy (this.gameObject);
 		}
+	}
+
+	// Set origin object of the projectile
+	public void setOrigin(GameObject origin) 
+	{
+		this.origin = origin;
+	}
+
+	// Set target object of the projectile
+	public void setTarget(GameObject target) 
+	{
+		this.target = target;
+	}
+
+	// Fire the projectile
+	public void fire() 
+	{
+		projectileMover = this.GetComponent<Rigidbody2D> ();
+		projectileSpeed = 40f;
+		Vector3 direction = origin.transform.rotation * Vector3.forward;
+		// Shoot straight to your direction
+		projectileMover.velocity = direction + projectileSpeed * direction.normalized;	
 	}
 
 	public virtual void OnCollisionEnter2D(Collision2D collision)

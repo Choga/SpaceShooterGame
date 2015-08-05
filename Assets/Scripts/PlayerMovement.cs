@@ -71,7 +71,24 @@ public class PlayerMovement : MonoBehaviour
 		timer -= Time.deltaTime;
 		if(Input.GetButton ("Fire1")) {
 			if(timer <= 0) {
-				Instantiate (bullet);
+
+				Vector3 thisDirection = this.transform.rotation * Vector3.forward;
+				
+				// Initial position for the projectile
+				Vector3 intialPosition = this.transform.position + thisDirection;
+
+				// Instantiate bullet with intialPosition and random rotation
+				GameObject bulletObject = (GameObject) Instantiate (bullet, intialPosition, Random.rotation);
+
+				// Get the script
+				ProjectileMover projectileMover = (ProjectileMover) bulletObject.transform.GetComponent("ProjectileMover");
+
+				// Set origin of the projectile
+				projectileMover.setOrigin(this.gameObject);
+
+				projectileMover.fire();
+
+				// Reset
 				timer = firingRate;
 			}
 		}
