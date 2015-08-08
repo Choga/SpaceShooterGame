@@ -39,7 +39,7 @@ public class ProjectileMover : MonoBehaviour {
 	void Update () 
 	{
 		// Distance from player is too far
-		if (Vector2.Distance (this.transform.position, origin.transform.position) > maxDistance) 
+		if (Vector2.Distance (this.transform.position, player.transform.position) > maxDistance) 
 		{
 			Destroy (this.gameObject);
 		}
@@ -67,19 +67,35 @@ public class ProjectileMover : MonoBehaviour {
 		projectileMover.velocity = direction + projectileSpeed * direction.normalized;	
 	}
 
-	public virtual void OnCollisionEnter2D(Collision2D collision)
+//	public virtual void OnCollisionEnter2D(Collision2D collision)
+//	{
+//		// Explosion location where player is
+//		explosion.transform.position = this.gameObject.transform.position;
+//
+//		// Pass to ExplosionHandler to create explosion
+//		ExplosionHandler.createAndDestroyExplosion (this.gameObject.transform.position, explosion);
+//
+//		// Apply the projectile damage to the object
+//		if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player") {
+//			collision.gameObject.BroadcastMessage ("applyDamage", damage);
+//		}
+//
+//		Destroy (this.gameObject);	// Destroy projectile after collision
+//	}
+
+	public virtual void OnTriggerEnter2D(Collider2D collider)
 	{
 		// Explosion location where player is
 		explosion.transform.position = this.gameObject.transform.position;
-
+		
 		// Pass to ExplosionHandler to create explosion
 		ExplosionHandler.createAndDestroyExplosion (this.gameObject.transform.position, explosion);
-
+		
 		// Apply the projectile damage to the object
-		if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player") {
-			collision.gameObject.BroadcastMessage ("applyDamage", damage);
+		if (collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Player") {
+			collider.gameObject.BroadcastMessage ("applyDamage", damage);
 		}
-
+		
 		Destroy (this.gameObject);	// Destroy projectile after collision
 	}
 }

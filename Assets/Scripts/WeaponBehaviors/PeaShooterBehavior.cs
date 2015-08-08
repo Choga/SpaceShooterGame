@@ -12,7 +12,8 @@ public class PeaShooterBehavior : ProjectileMover {
 	
 	
 	// Use this for initialization
-	protected override void Start () {
+	protected override void Start () 
+	{
 		base.Start ();
 
 		damage = 10;
@@ -32,7 +33,11 @@ public class PeaShooterBehavior : ProjectileMover {
 	void Update () {
 	}
 
-	public override void OnCollisionEnter2D(Collision2D collision) {
-		base.OnCollisionEnter2D (collision);
+//	public override void OnCollisionEnter2D(Collision2D collision) {
+//		base.OnCollisionEnter2D (collision);
+//	}
+
+	public override void OnTriggerEnter2D(Collider2D collider) {
+		base.OnTriggerEnter2D (collider);
 	}
 }

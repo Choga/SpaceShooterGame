@@ -19,7 +19,28 @@ public class PassThroughBehavior : ProjectileMover {
 	
 	}
 
-	public override void OnCollisionEnter2D(Collision2D collision) {
+//	public override void OnCollisionEnter2D(Collision2D collision) {
+//		// Explosion location where player is
+//		explosion.transform.position = this.gameObject.transform.position;
+//		
+//		// Pass to ExplosionHandler to create explosion
+//		ExplosionHandler.createAndDestroyExplosion (this.gameObject.transform.position, explosion);
+//		
+//		// Apply the projectile damage to the object
+//		if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player") {
+//			collision.gameObject.BroadcastMessage ("applyDamage", damage);
+//			if(maxPassThroughs-- > 0) {
+//				damage += damageBoost;
+//				projectileSpeed -= speedReduction;
+//			} else {
+//				Destroy (this.gameObject);	// Destroy projectile after collision
+//			}
+//		}
+//		
+//
+//	}
+
+	public override void OnTriggerEnter2D(Collider2D collider) {
 		// Explosion location where player is
 		explosion.transform.position = this.gameObject.transform.position;
 		
@@ -27,8 +48,8 @@ public class PassThroughBehavior : ProjectileMover {
 		ExplosionHandler.createAndDestroyExplosion (this.gameObject.transform.position, explosion);
 		
 		// Apply the projectile damage to the object
-		if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player") {
-			collision.gameObject.BroadcastMessage ("applyDamage", damage);
+		if (collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Player") {
+			collider.gameObject.BroadcastMessage ("applyDamage", damage);
 			if(maxPassThroughs-- > 0) {
 				damage += damageBoost;
 				projectileSpeed -= speedReduction;
@@ -37,6 +58,6 @@ public class PassThroughBehavior : ProjectileMover {
 			}
 		}
 		
-
+		
 	}
 }

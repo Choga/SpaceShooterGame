@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
 	private string[] manifest;
 	private HealthBar healthBar;
 
+	Vector3 worldUp = new Vector3(0,0,1);
+
 
 	// Use this for initialization
 	void Start () 
@@ -54,7 +56,13 @@ public class PlayerMovement : MonoBehaviour
 		float xInput = Input.GetAxis ("Horizontal");	// Inputs
 		float yInput = Input.GetAxis("Vertical");
 
+		Vector3 mousePosition = Input.mousePosition;
+
 		playerMover.velocity = new Vector2 (xInput * currSpeed, yInput * currSpeed);	// Velocity
+
+		// Mouse position
+		Vector3 pos = Camera.main.ScreenToWorldPoint (new Vector3 (mousePosition.x, mousePosition.y, 10));
+		this.transform.LookAt (pos, worldUp);
 
 		// When either xInput or yInput isn't 0, recalculate rotation
 		if (xInput != 0 || yInput != 0) {
